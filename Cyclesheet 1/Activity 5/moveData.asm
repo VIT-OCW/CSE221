@@ -1,0 +1,22 @@
+.model small
+.stack 64
+.data
+.code
+START: 	MOV AX, @DATA
+		MOV DS, AX
+		MOV CX, 0005H
+		MOV SI, 1200H
+		PUTDATA:	MOV [SI], CX
+					INC SI
+		LOOP PUTDATA
+		MOV CX, 0005H
+		MOV DI, 2200H
+		MOV SI, 1200H
+		MOVE:	MOV BX, [SI]
+				MOV [DI], BX
+				INC SI
+				INC DI
+		LOOP MOVE
+		MOV AH, 4CH
+		INT 21H
+END START
