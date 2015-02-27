@@ -1,0 +1,30 @@
+.model small
+.stack 64
+.data
+.code
+START: 	MOV AX, @DATA
+		MOV DS, AX
+		MOV AL, 10111000b
+		MOV CX, 0002H
+		PRINT:	MOV AH, 00H
+				SHL AX, 0004H
+				PUSH AX
+				CMP AX, 0A00H
+				JGE PRINT_LETTER
+				ADD AH, '0'
+				MOV DL, AH
+				MOV AH, 02H
+				INT 21H
+		BACK:	POP AX
+		LOOP PRINT
+		MOV DL, 'h'
+		MOV AH, 02H
+		INT 21H
+		HLT
+		PRINT_LETTER:	SUB AH, 0AH
+						ADD AH, 'A'
+						MOV DL, AH
+						MOV AH, 02H
+						INT 21H
+						JMP BACK
+END START
