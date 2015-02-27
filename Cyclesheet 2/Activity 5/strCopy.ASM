@@ -1,0 +1,18 @@
+.model small
+.stack 64
+.data
+STR1 dB "Hello!"
+STR2 dB 6 DUP(?)
+.code
+START: 	MOV AX, @DATA
+		MOV DS, AX
+		CLD
+		MOV CX, 0006H
+		LEA SI, STR1
+		MOV AX, 03000H
+		MOV ES, AX
+		LEA D1, STR2
+		REP MOVSB
+		MOV AH, 4CH
+		INT 21H
+END START
